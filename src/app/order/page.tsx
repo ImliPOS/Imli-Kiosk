@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { CartPanel } from "@/components/CartPanel";
 import { CategorySidebar } from "@/components/CategorySidebar";
@@ -29,6 +30,7 @@ export default function KioskPage() {
   );
   const [printState, setPrintState] = useState<PrintState>({ phase: "idle" });
 
+  const router = useRouter();
   const cart = useCart();
   const printer = usePrinter();
   const items = useMemo(
@@ -65,6 +67,7 @@ export default function KioskPage() {
     setReceiptOpen(false);
     setPaymentMethod(null);
     cart.clear();
+    router.push("/");
   };
 
   const isPrinting = printState.phase === "printing";
