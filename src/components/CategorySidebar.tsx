@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import type { Category } from "@/lib/types";
 
 type Props = {
@@ -16,14 +17,14 @@ export function CategorySidebar({
   return (
     <aside
       aria-label="Menu categories"
-      className="flex h-full w-44 shrink-0 flex-col border-r border-zinc-200 bg-white"
+      className="flex h-full w-48 shrink-0 flex-col border-r border-border bg-card"
     >
-      <div className="border-b border-zinc-200 px-4 py-3">
-        <h2 className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+      <div className="border-b border-border px-4 py-4">
+        <h2 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
           Categories
         </h2>
       </div>
-      <ul className="flex flex-1 flex-col overflow-y-auto py-1">
+      <ul className="flex flex-1 flex-col overflow-y-auto py-2">
         {categories.map((c) => {
           const active = c.id === activeCategoryId;
           return (
@@ -31,16 +32,17 @@ export function CategorySidebar({
               <button
                 type="button"
                 onClick={() => onSelect(c.id)}
-                className={`relative w-full px-4 py-4 text-left text-sm font-medium transition-colors ${
+                className={cn(
+                  "relative w-full px-4 py-4 text-left text-sm font-medium transition-colors",
                   active
-                    ? "bg-amber-50 text-amber-700"
-                    : "text-zinc-800 hover:bg-zinc-50 active:bg-zinc-100"
-                }`}
+                    ? "bg-primary/10 text-primary"
+                    : "text-foreground/80 hover:bg-secondary/40 hover:text-foreground",
+                )}
               >
                 {active && (
                   <span
                     aria-hidden
-                    className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-amber-500"
+                    className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-primary"
                   />
                 )}
                 {c.name}

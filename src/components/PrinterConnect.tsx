@@ -1,5 +1,8 @@
 "use client";
 
+import { Printer, AlertCircle, Loader2 } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
 import type { PrinterStatus } from "@/lib/usePrinter";
 
 type Props = {
@@ -10,13 +13,13 @@ type Props = {
 export function PrinterConnect({ status, onPair }: Props) {
   if (status.kind === "unsupported") {
     return (
-      <span
+      <Badge
+        variant="muted"
         title="Use Chrome or another Chromium browser for USB printing."
-        className="flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1.5 text-xs font-semibold text-zinc-500"
       >
-        <span aria-hidden className="h-2 w-2 rounded-full bg-zinc-400" />
+        <AlertCircle className="h-3 w-3" />
         Printer unsupported
-      </span>
+      </Badge>
     );
   }
 
@@ -34,20 +37,24 @@ export function PrinterConnect({ status, onPair }: Props) {
     }
   })();
 
-  const dotClass = (() => {
+  const variant = (() => {
     switch (status.kind) {
       case "ready":
-        return "bg-emerald-500";
-      case "connecting":
-        return "bg-amber-500 animate-pulse";
+        return "default";
       case "error":
-        return "bg-red-500";
+        return "destructive";
       default:
-        return "bg-zinc-400";
+        return "outline";
     }
   })();
 
   const disabled = status.kind === "connecting" || status.kind === "ready";
+  const Icon =
+    status.kind === "connecting"
+      ? Loader2
+      : status.kind === "error"
+        ? AlertCircle
+        : Printer;
 
   return (
     <button
@@ -55,10 +62,14 @@ export function PrinterConnect({ status, onPair }: Props) {
       onClick={onPair}
       disabled={disabled}
       title={status.kind === "error" ? status.message : undefined}
-      className="flex items-center gap-2 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-xs font-semibold text-zinc-700 shadow-sm disabled:opacity-90"
+      className="disabled:cursor-default"
     >
-      <span aria-hidden className={`h-2 w-2 rounded-full ${dotClass}`} />
-      {label}
+      <Badge variant={variant} className="px-3 py-1.5">
+        <Icon
+          className={`h-3 w-3 ${status.kind === "connecting" ? "animate-spin" : ""}`}
+        />
+        {label}
+      </Badge>
     </button>
   );
 }

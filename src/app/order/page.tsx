@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { CartPanel } from "@/components/CartPanel";
 import { CategorySidebar } from "@/components/CategorySidebar";
 import { ItemGrid } from "@/components/ItemGrid";
@@ -73,7 +74,7 @@ export default function KioskPage() {
   const isPrinting = printState.phase === "printing";
 
   return (
-    <div className="flex h-screen bg-zinc-100">
+    <div className="flex h-screen bg-background">
       <CategorySidebar
         categories={categories}
         activeCategoryId={activeCategoryId}
@@ -81,20 +82,20 @@ export default function KioskPage() {
       />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center gap-3 border-b border-zinc-200 bg-white px-4 py-3 shadow-sm">
+        <header className="flex items-center gap-3 border-b border-border bg-card px-4 py-3">
           <div className="flex flex-1 flex-col">
-            <div className="text-base font-bold leading-tight text-zinc-900">
+            <div className="text-base font-bold leading-tight text-foreground">
               Kiosk Café
             </div>
-            <div className="text-xs text-zinc-500">
+            <div className="text-xs text-muted-foreground">
               {activeCategory?.name ?? "Menu"}
             </div>
           </div>
           <PrinterConnect status={printer.status} onPair={printer.pair} />
           {cart.itemCount > 0 && (
-            <div className="rounded-full bg-amber-500 px-3 py-1 text-xs font-semibold text-white">
+            <Badge variant="default" className="px-3 py-1">
               {cart.itemCount} in cart
-            </div>
+            </Badge>
           )}
         </header>
 

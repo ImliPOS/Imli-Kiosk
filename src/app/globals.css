@@ -1,6 +1,71 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   Kiosk Café — Dark + Gold theme
+   Background : near-black / dark grey hierarchy
+   Accent     : warm gold for primary actions
+   ============================================================ */
+
+:root {
+  /* Surfaces (dark hierarchy) */
+  --background: oklch(0.16 0 0);          /* #1a1a1a — near black */
+  --foreground: oklch(0.96 0 0);          /* near white text */
+  --card: oklch(0.21 0 0);                /* #262626 — raised card */
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.21 0 0);
+  --popover-foreground: oklch(0.96 0 0);
+
+  /* Gold accent */
+  --primary: oklch(0.78 0.13 88);         /* #D4AF37-ish — soft warm gold */
+  --primary-foreground: oklch(0.18 0 0);  /* dark text on gold */
+
+  --secondary: oklch(0.26 0 0);           /* darker grey for secondary surfaces */
+  --secondary-foreground: oklch(0.96 0 0);
+
+  --muted: oklch(0.26 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+
+  --accent: oklch(0.78 0.13 88);
+  --accent-foreground: oklch(0.18 0 0);
+
+  --destructive: oklch(0.62 0.21 25);
+  --destructive-foreground: oklch(0.96 0 0);
+
+  --border: oklch(0.30 0 0);
+  --input: oklch(0.26 0 0);
+  --ring: oklch(0.78 0.13 88);
+
+  --radius: 0.625rem;
+}
 
 @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -8,9 +73,15 @@
 html,
 body {
   height: 100%;
-  background: #f4f4f5;
-  color: #18181b;
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior: none;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
 }
