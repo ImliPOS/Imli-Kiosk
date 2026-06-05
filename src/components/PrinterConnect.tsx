@@ -8,7 +8,17 @@ type Props = {
 };
 
 export function PrinterConnect({ status, onPair }: Props) {
-  if (status.kind === "unsupported") return null;
+  if (status.kind === "unsupported") {
+    return (
+      <span
+        title="Use Chrome or another Chromium browser for USB printing."
+        className="flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1.5 text-xs font-semibold text-zinc-500"
+      >
+        <span aria-hidden className="h-2 w-2 rounded-full bg-zinc-400" />
+        Printer unsupported
+      </span>
+    );
+  }
 
   const label = (() => {
     switch (status.kind) {
