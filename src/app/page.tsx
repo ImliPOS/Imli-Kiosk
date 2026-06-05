@@ -36,9 +36,7 @@ export default function LandingPage() {
             <ArrowRight className="ml-1 h-5 w-5" />
           </Link>
         </Button>
-        <p className="text-xs uppercase tracking-widest text-muted-foreground">
-          Tap to begin
-        </p>
+        
       </div>
     </div>
   );
