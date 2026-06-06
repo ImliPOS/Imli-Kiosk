@@ -103,7 +103,10 @@ export function CartPanel({
 
       <Separator />
 
-      <footer className="bg-card px-4 pt-3 pb-4">
+      <footer
+        className="bg-card px-4 pt-3 pb-4"
+        style={{ paddingBottom: "calc(4rem + env(safe-area-inset-bottom))" }}
+      >
         <div className="mb-3 flex items-baseline justify-between">
           <span className="text-sm font-medium text-muted-foreground">Total</span>
           <span className="text-2xl font-bold tabular-nums text-foreground">

@@ -22,6 +22,9 @@ export const viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+  // Required for `env(safe-area-inset-*)` to report real values, so buttons
+  // can clear the Android nav bar.
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
