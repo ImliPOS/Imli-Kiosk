@@ -41,7 +41,10 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="relative flex w-full max-w-sm flex-col items-center gap-3">
+        <div
+          className="relative mb-8 flex w-full max-w-sm flex-col items-center gap-3"
+          style={{ marginBottom: "calc(2rem + env(safe-area-inset-bottom))" }}
+        >
           <Button asChild size="xl" className="w-full text-xl font-semibold">
             <Link href="/order">
               Order Now
